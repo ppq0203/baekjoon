@@ -1,7 +1,7 @@
 #include <stdio.h>
 #define MAX 9 //n ,m <= 8
 
-int printlist(int,int,int[MAX],int);
+int makelist(int,int,int[MAX],int);
 
 int main()
 {
@@ -9,22 +9,19 @@ int main()
 	int position = 1; // start list position = 1
 	scanf("%d %d", &n, &m); // input n,m 
 	int list[MAX]; // 
-	printlist(n,m,list, position);
+	makelist(n,m,list, position);
 
 	return 0;
 }
 
+void printlist(int[MAX],int);
 
-int printlist(int n, int m, int list[MAX], int position) // make & print number
+int makelist(int n, int m, int list[MAX], int position) // make & print number
 {
 	int include;
 	if(position > m) // if makelist finish print list
 	{
-		for(int i = 1; i <= m; i++)
-		{
-			printf("%d ", list[i]);
-		}
-		printf("\n");
+		printlist(list, m);
 		return 0;
 	}
 	else
@@ -38,9 +35,18 @@ int printlist(int n, int m, int list[MAX], int position) // make & print number
 			if (include == 0) // If the numbers are not there before
 			{
 				list[position] = i; // put list number
-				printlist(n, m, list, position+1); // find next number
+				makelist(n, m, list, position+1); // find next number
 			}
 		}
 		return 0;
 	}
+}
+
+void printlist(int list[MAX], int m)
+{
+	for(int i = 1; i <= m; i++)
+	{
+		printf("%d ", list[i]);
+	}
+	printf("\n");
 }
