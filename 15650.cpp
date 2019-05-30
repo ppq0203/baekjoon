@@ -29,7 +29,7 @@ int printlist(int n, int m, int list[MAX], int position) // make & print number
 	}
 	else
 	{
-		for(int i = list[position-1]+1; i <= n; i++) // loop 1~n
+		for(int i = list[position-1]+1; i <= n; i++) // loop previous number ~ n , if position = 1 (first loop),i = 1~n because list[0] = 0
 		{
 			list[position] = i; // put list number
 			printlist(n, m, list, position+1); // find next number
