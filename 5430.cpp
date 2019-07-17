@@ -23,7 +23,6 @@ void ac_algorithm()
 	int list_back;
 	int reverse = 0; // basic value is 0
 	scanf("%s", p);
-	printf("%s\n", p);
 	list_back = setting(list);
 
 	// operation
@@ -57,8 +56,9 @@ void ac_algorithm()
 			if (i != list_back-1)
 				printf("%d,", list[i]);
 			else // end
-				printf("%d]\n", list[i]);
+				printf("%d", list[i]);
 		}
+		printf("]\n");
 	}
 	else // reverse basic
 	{
@@ -68,8 +68,9 @@ void ac_algorithm()
 			if (i != list_front)
 				printf("%d,", list[i]);
 			else // end
-				printf("%d]\n", list[i]);
+				printf("%d", list[i]);
 		}
+		printf("]\n");
 	}
 }
 
@@ -78,12 +79,16 @@ int setting(int *list)
 {
 	int num;
 	scanf("%d", &num);
-	getchar(); // getchar '\n'
-	getchar(); // getchar '['
+	while(getchar() == '\n'); // getchar '\n' and '['
 	for (int i = 0; i < num; ++i)
 	{
 		scanf("%d", list+i);
 		getchar(); // getchar ',' or ']'
+	}
+	if (num == 0)
+	{
+		getchar();
+		getchar();
 	}
 	return num;
 }
