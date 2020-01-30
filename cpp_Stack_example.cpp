@@ -9,16 +9,16 @@ private:
 		struct _node* link;
 	}node;
 	int m_size;
-	node* top;
+	node* stack;
 public:
 	Stack()
 	{
 		m_size = 0;
-		top = NULL;
+		stack = NULL;
 	}
 
 	int empty() {
-		return (top == NULL);
+		return (stack == NULL);
 	}
 
 	void push(int data) {
@@ -26,29 +26,44 @@ public:
 		temp->data = data;
 		temp->link = NULL;
 		if (empty()) {
-			top = temp;
+			stack = temp;
 		}
 		else {
-			temp->link = top;
-			top = temp;
+			temp->link = stack;
+			stack = temp;
 		}
 		m_size++;
 		printf("pushed data: %d\n", data);
 	}
 
-	node* pop() {
+	int pop() {
 		node* temp = NULL;
 		if (empty()) {
 			printf("error : trying to pop from empty stack\n");
 		}
 		else {
-			temp = top;
-			top = temp->link;
+			temp = stack;
+			stack = temp->link;
 			printf("poped data: %d\n", temp->data);
 			m_size--;
 		}
-		return temp;
+		int popdata = temp->data;
+		free(temp);
+		return popdata;
 	}
+
+	int top() {
+		node* temp = stack;
+		if (empty()) {
+			printf("error : trying to top from empty stack\n");
+			return NULL;
+		}
+		else {
+			printf("top data: %d\n", temp->data);
+			return temp->data;
+		}
+	}	
+
 	int size() {
 		printf("stack size: %d\n", m_size);
 		return m_size;
@@ -57,8 +72,8 @@ public:
 
 int main(int argc, char const *argv[])
 {
-	Stack st = Stack();
-	Stack st2 = Stack();
+	Stack st;
+	Stack st2;
 	st.push(12);
 	st.push(3);
 	st2.push(100);
