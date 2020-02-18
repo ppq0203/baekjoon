@@ -1,81 +1,41 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stack>
+#include <queue>
 
-class Stack
-{
-private:
-	typedef struct _node {
-		int data;
-		struct _node* link;
-	}node;
-	int m_size;
-	node* top;
-public:
-	Stack()
-	{
-		m_size = 0;
-		top = NULL;
-	}
-
-	int empty() {
-		return (top == NULL);
-	}
-
-	void push(int data) {
-		node* temp = (node*)malloc(sizeof(node));
-		temp->data = data;
-		temp->link = NULL;
-		if (empty()) {
-			top = temp;
-		}
-		else {
-			temp->link = top;
-			top = temp;
-		}
-		m_size++;
-		printf("pushed data: %d\n", data);
-	}
-
-	node* pop() {
-		node* temp = NULL;
-		if (empty()) {
-			printf("error : trying to pop from empty stack\n");
-		}
-		else {
-			temp = top;
-			top = temp->link;
-			printf("poped data: %d\n", temp->data);
-			m_size--;
-		}
-		return temp;
-	}
-	int size() {
-		printf("stack size: %d\n", m_size);
-		return m_size;
-	}
-};
 
 int main(int argc, char const *argv[])
 {
-	Stack st = Stack();
-	Stack st2 = Stack();
-	st.push(12);
-	st.push(3);
-	st2.push(100);
-	st2.push(90);
-	st.push(9);
-	st.size();
-	st.pop();
-	st.pop();
-	st.size();
-	st.push(7);
-	st.pop();
-	st.size();
-	st.pop();
-	st.pop();
-	st.pop();
-	st.pop();
-	st.size();
-
+//	std::stack<int*> S1, S2, *saveS;
+//	int* a;
+//	int b[3] = {1,2,3};
+//	a = b;
+//	S1.push(a);
+//	int c[3] = {4,5,6};
+//	a = c;
+//	S1.push(a);
+//	a = (int*)malloc(3*sizeof(int));
+//	a[0] = 7;
+//	a[1] = 8;
+//	a[2] = 9;
+//	S1.push(a);
+//	saveS = &S1;
+//	saveS->pop();
+//	//printf("%d\n", saveS->top()[1]);
+//	//printf("%d\n", S1.top()[1]);
+//	printf("%d", !(2%2));
+	std::queue<int*> que;
+	int a;
+	a= 10;
+	que.push(&a);
+	a= 20;
+	que.push(&a);
+	a= 30;
+	que.push(&a);
+	a= 40;
+	que.push(&a);
+	printf("%d %d\n", *que.front(), *que.back());
+	que.pop();
+	printf("%d %d\n", *que.front(), *que.back());
 	return 0;
 }
